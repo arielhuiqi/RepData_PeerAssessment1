@@ -94,7 +94,7 @@ attach(dataActivity)
 ## 
 ##     date, interval, steps
 ## 
-## The following objects are masked from dataActivity (pos = 10):
+## The following objects are masked from dataActivity (pos = 8):
 ## 
 ##     date, interval, steps
 ## 
@@ -110,7 +110,11 @@ attach(dataActivity)
 ## 
 ##     date, interval, steps
 ## 
-## The following objects are masked from dataActivity (pos = 15):
+## The following objects are masked from dataActivity (pos = 14):
+## 
+##     date, interval, steps
+## 
+## The following objects are masked from dataActivity (pos = 16):
 ## 
 ##     date, interval, steps
 ```
