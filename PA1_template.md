@@ -63,7 +63,7 @@ str(dataActivity)
 dataActivity$date <- as.Date(dataActivity$date, format = "%Y-%m-%d")
 ```
 
-####For convenience's sake, attach the data
+####Attach the data
 
 ```r
 attach(dataActivity)
@@ -74,6 +74,14 @@ attach(dataActivity)
 ## 
 ##     interval
 ## 
+## The following objects are masked from dataActivity (pos = 3):
+## 
+##     date, interval, steps
+## 
+## The following objects are masked from dataActivity (pos = 4):
+## 
+##     date, interval, steps
+## 
 ## The following objects are masked from dataActivity (pos = 5):
 ## 
 ##     date, interval, steps
@@ -82,15 +90,23 @@ attach(dataActivity)
 ## 
 ##     date, interval, steps
 ## 
-## The following objects are masked from dataActivity (pos = 7):
-## 
-##     date, interval, steps
-## 
-## The following objects are masked from dataActivity (pos = 8):
+## The following objects are masked from dataActivity (pos = 9):
 ## 
 ##     date, interval, steps
 ## 
 ## The following objects are masked from dataActivity (pos = 10):
+## 
+##     date, interval, steps
+## 
+## The following objects are masked from dataActivity (pos = 11):
+## 
+##     date, interval, steps
+## 
+## The following objects are masked from dataActivity (pos = 12):
+## 
+##     date, interval, steps
+## 
+## The following objects are masked from dataActivity (pos = 14):
 ## 
 ##     date, interval, steps
 ```
@@ -148,7 +164,7 @@ intervalave <- tapply(steps, interval, mean, na.rm = TRUE)
 ####Time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 ```r
-hours <- as.numeric(names(intervalave))/60
+hours <- as.numeric(names(intervalave))
 plot(hours, intervalave, type="l", xlab="Time (hours)", ylab="Average number of steps in 5-min interval", main="Daily activity pattern")
 ```
 
@@ -183,6 +199,8 @@ na_number
 
 
 ####Imputing data
+
+#####The daily activity pattern can be used to impute these missing values. For every missing value in the orignial data set the average number of steps in that 5-minutes interval is used. This assumes that the person follows a daily routine.
 
 ```r
 clean_data <- transform(dataActivity, steps=ifelse(is.na(steps), intervalave, steps))
@@ -233,7 +251,7 @@ cleansteps <- aggregate(clean_data$steps, by=list(interval=clean_data$interval, 
 
 ```r
 library(ggplot2)
-g <- ggplot(cleansteps, aes(interval/60, x))
+g <- ggplot(cleansteps, aes(interval, x))
 g + geom_line() + facet_grid(weekday ~ .) +
     labs(y="Average number of steps in 5-min interval") +
     labs(x="Time (hours)") +
